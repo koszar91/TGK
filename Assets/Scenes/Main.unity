@@ -123,32 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &149996842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4788494229754366118, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
-  m_PrefabInstance: {fileID: 2025483401}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &149996843
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149996842}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9fe32923654a59341b878d0f4afbd048, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &149996849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4788494229754366116, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
@@ -779,10 +753,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4788494229754366117, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1111763185, guid: 74484b6f6f852724d86992b729a22eae, type: 3}
     - target: {fileID: 4788494229754366118, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
       propertyPath: m_Name
       value: Player
