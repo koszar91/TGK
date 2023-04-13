@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
     
     SpriteRenderer sprite;
     Rigidbody2D rb;
+    Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -29,9 +31,20 @@ public class PlayerController : MonoBehaviour
         movementInput = movementValue.Get<Vector2>();
     }
 
+    void OnFire()
+    {
+        print("attack");
+        animator.SetTrigger("attack");
+    }
+
     private void Move()
     {
-        if (movementInput == Vector2.zero) return;
+        if (movementInput == Vector2.zero)
+        {
+            animator.SetBool("moving", false);
+            return;
+        }
+        animator.SetBool("moving", true);
 
         // Check for vertical and horizontal collisions
         List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
