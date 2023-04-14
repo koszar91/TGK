@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4788494229754366118, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
+  skeletonPrefab: {fileID: 7079777409958595582, guid: 72f48d5f07a8d724aaca695661909fcf, type: 3}
   playerCamera: {fileID: 743470126}
   dungeonGenerator: {fileID: 1427776903}
 --- !u!4 &1427776902

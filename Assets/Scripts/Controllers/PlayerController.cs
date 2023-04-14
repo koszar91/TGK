@@ -31,11 +31,6 @@ public class PlayerController : MonoBehaviour
         movementInput = movementValue.Get<Vector2>();
     }
 
-    void OnFire()
-    {
-        animator.SetTrigger("attack");
-    }
-
     private void Move()
     {
         if (movementInput == Vector2.zero)
