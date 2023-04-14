@@ -24,7 +24,7 @@ public class DungeonGenerator : MonoBehaviour
         Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left
     };
 
-    public void GenerateDungeon()
+    public void GenerateDungeon(Vector2Int playerStartPosition)
     {
         var floorPositions = new HashSet<Vector2Int>();
         var currentStartPosition = Vector2Int.zero;
@@ -47,7 +47,7 @@ public class DungeonGenerator : MonoBehaviour
         HashSet<Vector2Int> wallPositions = GenerateWalls(floorPositions);
         VisualizeTiles(wallPositions, wallTilemap, wallTile);
 
-        Vector2Int exitPosition = wallPositions.ElementAt(Random.Range(0, wallPositions.Count));
+        Vector2Int exitPosition = CreateExitPosition(wallPositions, playerStartPosition);
         Vector3Int exitTilePosition = exitTilemap.WorldToCell((Vector3Int)exitPosition);
         wallTilemap.SetTile(exitTilePosition, null);
         exitTilemap.SetTile(exitTilePosition, exitTile);
@@ -85,6 +85,22 @@ public class DungeonGenerator : MonoBehaviour
             floorPositions.UnionWith(walk);
         }
         return floorPositions;
+    }
+
+    private Vector2Int CreateExitPosition(HashSet<Vector2Int> wallPositions, Vector2Int playerPosition)
+    {
+        Vector2Int currentExitPosition = wallPositions.ElementAt(0);
+        float currentDistance = Vector2Int.Distance(currentExitPosition, playerPosition); 
+        foreach (var position in wallPositions)
+        {
+            float distance = Vector2Int.Distance(position, playerPosition); 
+            if (distance > currentDistance)
+            {
+                currentExitPosition = position;
+                currentDistance = distance; 
+            }
+        }
+        return currentExitPosition;
     }
 
     private HashSet<Vector2Int> GenerateWalls(HashSet<Vector2Int> floorPositions)

@@ -517,10 +517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5309bbc46e394447a1bcbee8a667a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 100
-  walkLength: 100
+  iterations: 120
+  walkLength: 120
   roomsCount: 7
-  corridorLength: 50
+  corridorLength: 60
   floorTilemap: {fileID: 1666441207}
   wallTilemap: {fileID: 1963093754}
   exitTilemap: {fileID: 151051309}

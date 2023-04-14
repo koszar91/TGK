@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public DungeonGenerator dungeonGenerator;
 
     GameObject player;
+    Vector2Int playerStartPosition = Vector2Int.zero;
     bool nextLevel = false;
     int currentLevel = 1;
 
@@ -37,11 +38,11 @@ public class GameController : MonoBehaviour
     {
         // Reset dungeon
         dungeonGenerator.ClearDungeon();
-        dungeonGenerator.GenerateDungeon();
+        dungeonGenerator.GenerateDungeon(playerStartPosition);
 
         // Reset player
         Destroy(player);
-        player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        player = Instantiate(playerPrefab, (Vector3Int)playerStartPosition, Quaternion.identity);
         playerCamera.Follow = player.transform;
     }
     
