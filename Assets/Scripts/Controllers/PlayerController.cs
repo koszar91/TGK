@@ -6,10 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 1.0f;
-    public float collisionOffset = 0.005f;
-    public ContactFilter2D movementFilter;
-    Vector2 movementInput;
+    public float collisionOffset = 0.00005f;
     
+    Vector2 movementInput;
     SpriteRenderer sprite;
     Rigidbody2D rb;
     Animator animator;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        print("attack");
         animator.SetTrigger("attack");
     }
 
@@ -47,7 +45,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("moving", true);
 
         // Check for vertical and horizontal collisions
-        List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+        var castCollisions = new List<RaycastHit2D>();
+        var movementFilter = new ContactFilter2D();
         int collisionsVerticalCount = rb.Cast(
             new Vector2(0.0f, movementInput.y), movementFilter, castCollisions,
             movementSpeed * Time.fixedDeltaTime + collisionOffset
