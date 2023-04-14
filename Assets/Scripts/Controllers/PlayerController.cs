@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float collisionOffset = 0.00005f;
     
     Vector2 movementInput;
+    
     SpriteRenderer sprite;
     Rigidbody2D rb;
     Animator animator;

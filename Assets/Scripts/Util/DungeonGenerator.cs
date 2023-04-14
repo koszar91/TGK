@@ -8,8 +8,10 @@ using Random = UnityEngine.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    public int iterations = 200;
-    public int walkLength = 300;
+    public int iterations = 120;
+    public int walkLength = 120;
+    public int roomsCount = 7;
+    public int corridorLength = 60;
 
     public Tilemap floorTilemap;
     public Tilemap wallTilemap;
@@ -24,14 +26,29 @@ public class DungeonGenerator : MonoBehaviour
 
     public void GenerateDungeon()
     {
-        var floorPositions = GenerateFloorPositions();
+        var floorPositions = new HashSet<Vector2Int>();
+        var currentStartPosition = Vector2Int.zero;
+        HashSet<Vector2Int> room = GenerateRoom(currentStartPosition);
+        floorPositions.UnionWith(room);
+
+        for (int i = 0; i < roomsCount - 1; i++)
+        {
+            Vector2Int randomRoomPosition = room.ElementAt(Random.Range(0, room.Count));
+            List<Vector2Int> corridor = GenerateCorridor(randomRoomPosition);
+            floorPositions.UnionWith(new HashSet<Vector2Int>(corridor));
+
+            currentStartPosition = corridor.Last();
+            room = GenerateRoom(currentStartPosition);
+            floorPositions.UnionWith(room);
+        }
+
         VisualizeTiles(floorPositions, floorTilemap, floorTile);
 
-        var wallPositions = GenerateWallPositions(floorPositions);
+        HashSet<Vector2Int> wallPositions = GenerateWalls(floorPositions);
         VisualizeTiles(wallPositions, wallTilemap, wallTile);
 
-        var exitPosition = wallPositions.ElementAt(Random.Range(0, wallPositions.Count));
-        var exitTilePosition = exitTilemap.WorldToCell((Vector3Int)exitPosition);
+        Vector2Int exitPosition = wallPositions.ElementAt(Random.Range(0, wallPositions.Count));
+        Vector3Int exitTilePosition = exitTilemap.WorldToCell((Vector3Int)exitPosition);
         wallTilemap.SetTile(exitTilePosition, null);
         exitTilemap.SetTile(exitTilePosition, exitTile);
     }
@@ -43,21 +60,34 @@ public class DungeonGenerator : MonoBehaviour
         exitTilemap.ClearAllTiles();
     }
 
-    private HashSet<Vector2Int> GenerateFloorPositions()
+    private List<Vector2Int> GenerateCorridor(Vector2Int startPosition)
+    {
+        var corridor = new List<Vector2Int>();
+        Vector2Int direction = DIRECTIONS[Random.Range(0, DIRECTIONS.Count)];
+        var position = startPosition;
+
+        for (int i = 0; i < corridorLength; i ++)
+        {
+            corridor.Add(position);
+            position += direction;
+        }
+        return corridor;
+    }
+
+    private HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition)
     {
         var floorPositions = new HashSet<Vector2Int>();
-        var position = Vector2Int.zero;
+        var position = startPosition;
         
         for (int i = 0; i < iterations; i++)
         {
             var walk = SimpleRandomWalk(position, walkLength);
             floorPositions.UnionWith(walk);
         }
-
         return floorPositions;
-    } 
+    }
 
-    private HashSet<Vector2Int> GenerateWallPositions(HashSet<Vector2Int> floorPositions)
+    private HashSet<Vector2Int> GenerateWalls(HashSet<Vector2Int> floorPositions)
     {
         var wallPositions = new HashSet<Vector2Int>();
 
@@ -72,7 +102,6 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-
         return wallPositions;
     }
 
@@ -86,7 +115,6 @@ public class DungeonGenerator : MonoBehaviour
             walk.Add(position);
             position += DIRECTIONS[Random.Range(0, DIRECTIONS.Count)];
         }
-
         return walk;
     }
 

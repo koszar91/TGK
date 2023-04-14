@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069bf7ba26a075499a754dab0c128da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 1427776901}
+  gameController: {fileID: 1427776901}
 --- !u!1 &743470125
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,8 +517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5309bbc46e394447a1bcbee8a667a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 200
-  walkLength: 300
+  iterations: 100
+  walkLength: 100
+  roomsCount: 7
+  corridorLength: 50
   floorTilemap: {fileID: 1666441207}
   wallTilemap: {fileID: 1963093754}
   exitTilemap: {fileID: 151051309}
