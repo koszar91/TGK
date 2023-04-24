@@ -59,16 +59,16 @@ public class PlayerController : MonoBehaviour
 
         rb.MovePosition(rb.position + movement * movementSpeed * Time.fixedDeltaTime);
 
-        // Flip sprite according to moving direction
+        // Rotate according to moving direction
         if (movement.x > 0)
         {
-            sprite.flipX = false;
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         
         if (movement.x < 0)
         {
-            sprite.flipX = true;
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
-        else {} // leave sprite as is
+        else {} // leave rotation as is
     }
 }
