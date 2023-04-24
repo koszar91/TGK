@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 1.0f;
-    public float collisionOffset = 0.00005f;
+    public float movementSpeed = 7.0f;
+    public float collisionOffset = 0.0f;
     
     Vector2 movementInput;
     

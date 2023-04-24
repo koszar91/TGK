@@ -43,10 +43,10 @@ GameObject:
   - component: {fileID: 4788494229754366117}
   - component: {fileID: 6126347877242147274}
   - component: {fileID: 869789079798160306}
+  - component: {fileID: 5682774578144208460}
   - component: {fileID: 573988625389082035}
   - component: {fileID: 5834204727650435376}
   - component: {fileID: 4515153454926323133}
-  - component: {fileID: 5682774578144208460}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -161,11 +161,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4788494229754366118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c6763529cc66b4aa418ba7889d2444, type: 3}
+  m_Script: {fileID: 11500000, guid: 05b07c46339105140aad425cc43fd602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  collisionOffset: 0.00005
+  movementSpeed: 7
+  collisionOffset: 0
+--- !u!114 &5682774578144208460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788494229754366118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e24a44f01caf1488f22f31c36950e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 7450234455958945528}
+  attackRange: 1.2
+  damage: 3
 --- !u!50 &573988625389082035
 Rigidbody2D:
   serializedVersion: 4
@@ -234,17 +249,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5682774578144208460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4788494229754366118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e24a44f01caf1488f22f31c36950e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 7450234455958945528}
-  attacRange: 0.5
