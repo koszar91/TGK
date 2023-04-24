@@ -60,8 +60,15 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * movementSpeed * Time.fixedDeltaTime);
 
         // Flip sprite according to moving direction
-        if (movement.x > 0) sprite.flipX = false;
-        if (movement.x < 0) sprite.flipX = true;
+        if (movement.x > 0)
+        {
+            sprite.flipX = false;
+        }
+        
+        if (movement.x < 0)
+        {
+            sprite.flipX = true;
+        }
         else {} // leave sprite as is
     }
 }

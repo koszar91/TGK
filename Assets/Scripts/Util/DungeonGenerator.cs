@@ -20,31 +20,36 @@ public class DungeonGenerator : MonoBehaviour
     public TileBase wallTile;
     public TileBase exitTile;
 
+    public HashSet<Vector2Int> FloorPositions { get; private set; }
+
     static List<Vector2Int> DIRECTIONS = new List<Vector2Int> {
         Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left
     };
 
     public void GenerateDungeon(Vector2Int playerStartPosition)
     {
-        var floorPositions = new HashSet<Vector2Int>();
+        FloorPositions = new HashSet<Vector2Int>();
+
+        // Add irst room
         var currentStartPosition = Vector2Int.zero;
         HashSet<Vector2Int> room = GenerateRoom(currentStartPosition);
-        floorPositions.UnionWith(room);
+        FloorPositions.UnionWith(room);
 
+        // Add rest of the rooms
         for (int i = 0; i < roomsCount - 1; i++)
         {
             Vector2Int randomRoomPosition = room.ElementAt(Random.Range(0, room.Count));
             List<Vector2Int> corridor = GenerateCorridor(randomRoomPosition);
-            floorPositions.UnionWith(new HashSet<Vector2Int>(corridor));
+            FloorPositions.UnionWith(new HashSet<Vector2Int>(corridor));
 
             currentStartPosition = corridor.Last();
             room = GenerateRoom(currentStartPosition);
-            floorPositions.UnionWith(room);
+            FloorPositions.UnionWith(room);
         }
 
-        VisualizeTiles(floorPositions, floorTilemap, floorTile);
+        VisualizeTiles(FloorPositions, floorTilemap, floorTile);
 
-        HashSet<Vector2Int> wallPositions = GenerateWalls(floorPositions);
+        HashSet<Vector2Int> wallPositions = GenerateWalls(FloorPositions);
         VisualizeTiles(wallPositions, wallTilemap, wallTile);
 
         Vector2Int exitPosition = CreateExitPosition(wallPositions, playerStartPosition);
@@ -58,6 +63,7 @@ public class DungeonGenerator : MonoBehaviour
         wallTilemap.ClearAllTiles();
         floorTilemap.ClearAllTiles();
         exitTilemap.ClearAllTiles();
+        FloorPositions = new HashSet<Vector2Int>();
     }
 
     private List<Vector2Int> GenerateCorridor(Vector2Int startPosition)

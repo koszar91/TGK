@@ -6,7 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     Animator animator;
     public Transform attackPoint;
-    public float attackRange = 0.5f;
+    public float attackRange = 1.2f;
     public float damage = 3.0f;
 
     void Start()
@@ -21,9 +21,9 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
         foreach (var collider in colliders)
         {
-            if (collider.tag == "Enemy")
+            if (collider.gameObject.tag == "Enemy")
             {
-                collider.GetComponent<EnemyCombat>().Hit(damage);
+                collider.gameObject.GetComponent<EnemyCombat>().Hit(damage);
             }
         }
     }

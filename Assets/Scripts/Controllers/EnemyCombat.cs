@@ -15,6 +15,12 @@ public class EnemyCombat : MonoBehaviour
     public void Hit(float damage)
     {
         health -= damage;
-        if (health <= 0) Destroy(this.gameObject);
+        Debug.Log("Enemy hit with " + damage + " damage!");
+        
+        if (health <= 0)
+        {
+            Debug.Log("Enemy dead!");
+            Destroy(this.gameObject);
+        }
     }
 }
