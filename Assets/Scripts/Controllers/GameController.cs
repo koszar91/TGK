@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
 
     int skeletonsCount = 50;
     List<GameObject> skeletons = new List<GameObject>();
-    int orcsCount = 30;
+    int orcsCount = 1;
     List<GameObject> orcs = new List<GameObject>();
 
     bool nextLevel = false;
