@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : MovementControllerBase
 {
-    Vector3 startPosition;
-    GameObject player;
-    public CollidableMovement collidableMovement;
+    private Vector3 startPosition;
+    private GameObject player;
+    private Rigidbody2D rb;
 
-    Vector3 patrolPoint;
-    float lastTimePatrolPointSet;
+    private Vector3 patrolPoint;
+    private float lastTimePatrolPointSet;
     public float patrolMovementSpeed = 3.0f;
     public float patrolRange = 5.0f;
     public float patrolPointChangePeriod = 4.0f;
@@ -21,6 +21,9 @@ public class EnemyMovement : MonoBehaviour
         startPosition = transform.position;
         player = GameObject.FindWithTag("Player");
         patrolPoint = ComputePatrolPoint();
+        rb = GetComponent<Rigidbody2D>();
+        float patrolOffset = UnityEngine.Random.Range(0f, patrolPointChangePeriod);
+        lastTimePatrolPointSet = Time.realtimeSinceStartup - patrolOffset;
     }
 
     void FixedUpdate()
@@ -34,12 +37,12 @@ public class EnemyMovement : MonoBehaviour
         {
             lastTimePatrolPointSet = Time.fixedTime;
             patrolPoint = ComputePatrolPoint();
-            Debug.Log("Patrol point changed to: " + patrolPoint);
         }
-        Vector3 destinationDir = patrolPoint - transform.position;
+        Vector2 destinationDir = (Vector2)(patrolPoint - transform.position);
         if (destinationDir.magnitude < 0.05) destinationDir = Vector3.zero;
         else destinationDir.Normalize();
-        collidableMovement.TryMove(destinationDir, patrolMovementSpeed);
+
+        Move(destinationDir * patrolMovementSpeed);
     }
 
     private Vector3 ComputePatrolPoint()

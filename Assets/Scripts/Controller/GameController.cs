@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
 
     int skeletonsCount = 50;
     List<GameObject> skeletons = new List<GameObject>();
-    int orcsCount = 1;
+    int orcsCount = 30;
     List<GameObject> orcs = new List<GameObject>();
 
     bool nextLevel = false;
@@ -59,9 +59,9 @@ public class GameController : MonoBehaviour
         skeletons.Clear();
         for (int i = 0; i < skeletonsCount; i++)
         {
-            Vector2Int skeletonPosition = dungeonGenerator.FloorPositions.ElementAt(Random.Range(0, dungeonGenerator.FloorPositions.Count));
-            Debug.Log("Spawning skeleton at position " + skeletonPosition);
-            skeletons.Add(Instantiate(skeletonPrefab, (Vector3Int)(skeletonPosition), Quaternion.identity));
+            int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
+            Vector2 skeletonPosition = dungeonGenerator.FloorPositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
+            skeletons.Add(Instantiate(skeletonPrefab, (Vector3)(skeletonPosition), Quaternion.identity));
         }
 
         // Reset orcs
@@ -69,9 +69,9 @@ public class GameController : MonoBehaviour
         orcs.Clear();
         for (int i = 0; i < orcsCount; i++)
         {
-            Vector2Int orcPosition = dungeonGenerator.FloorPositions.ElementAt(Random.Range(0, dungeonGenerator.FloorPositions.Count));
-            Debug.Log("Spawning orc at position " + orcPosition);
-            orcs.Add(Instantiate(orcPrefab, (Vector3Int)(orcPosition), Quaternion.identity));
+            int randomIndex = Random.Range(0, dungeonGenerator.FloorInsidePositions.Count);
+            Vector2 orcPosition = dungeonGenerator.FloorInsidePositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
+            orcs.Add(Instantiate(orcPrefab, (Vector3)(orcPosition), Quaternion.identity));
         }
     }
     

@@ -1,16 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MovementControllerBase
 {
     public float movementSpeed = 7.0f;
-    Vector2 movementInput;
+    private Vector2 movementInput;
+    private Rigidbody2D rb;
 
-    public CollidableMovement collidableMovement;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void FixedUpdate()
     {
-        collidableMovement.TryMove(movementInput, movementSpeed);
+        Move(movementInput * movementSpeed);
     }
 
     void OnMove(InputValue movementValue)
