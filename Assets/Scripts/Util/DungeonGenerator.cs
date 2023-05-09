@@ -21,6 +21,7 @@ public class DungeonGenerator : MonoBehaviour
     public TileBase exitTile;
 
     public HashSet<Vector2Int> FloorPositions { get; private set; }
+    public HashSet<Vector2Int> FloorInsidePositions { get; private set; }
 
     static List<Vector2Int> DIRECTIONS = new List<Vector2Int> {
         Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left
@@ -28,9 +29,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public void GenerateDungeon(Vector2Int playerStartPosition)
     {
-        FloorPositions = new HashSet<Vector2Int>();
-
-        // Add irst room
+        // Add first room
         var currentStartPosition = Vector2Int.zero;
         HashSet<Vector2Int> room = GenerateRoom(currentStartPosition);
         FloorPositions.UnionWith(room);
@@ -64,6 +63,7 @@ public class DungeonGenerator : MonoBehaviour
         floorTilemap.ClearAllTiles();
         exitTilemap.ClearAllTiles();
         FloorPositions = new HashSet<Vector2Int>();
+        FloorInsidePositions = new HashSet<Vector2Int>();
     }
 
     private List<Vector2Int> GenerateCorridor(Vector2Int startPosition)
@@ -120,6 +120,7 @@ public class DungeonGenerator : MonoBehaviour
                 var potentialWallPosition = floorPosition + direction;
                 if (!floorPositions.Contains(potentialWallPosition))
                 {
+                    FloorInsidePositions.Add(floorPosition);
                     wallPositions.Add(potentialWallPosition);
                 }
             }
