@@ -123,7 +123,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.05
+  m_LinearDrag: 15
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -186,8 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d302214e451ac094e8178377b799a2e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 100
-  speed: 2
+  speed: 2.5
   chaseSpeedMultiplier: 1.2
   chaseRange: 3
   patrolSpeedMultiplier: 1

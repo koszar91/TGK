@@ -8,7 +8,7 @@ public class EnemyMovement : MovementBase
 {
     private Vector3 startPosition;
     private Rigidbody2D rb;
-    public float speed = 2.0f;
+    public float speed = 6.0f;
 
     private GameObject player;
     public float chaseSpeedMultiplier = 1.2f;

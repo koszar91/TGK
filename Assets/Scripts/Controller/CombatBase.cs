@@ -33,8 +33,7 @@ public class CombatBase : MonoBehaviour
             GameObject collidedObject = collider.gameObject;
             if (collidedObject != gameObject && collidedObject.GetComponent<CombatBase>() != null)
             {
-                Vector3 hitDirection = collidedObject.transform.position - transform.position;
-                hitDirection.Normalize();
+                Vector3 hitDirection = (collidedObject.transform.position - transform.position).normalized;
                 collidedObject.GetComponent<CombatBase>().Hit(attackDamage, hitDirection);
             }
         }
@@ -44,7 +43,7 @@ public class CombatBase : MonoBehaviour
     {
         animator.SetTrigger("hit");
         currentHealth -= damage;
-        rb.AddForce((Vector2)hitDirection * knockbackForce, ForceMode2D.Impulse);
         Debug.Log(gameObject.name + " hit with " + damage.ToString() + ". Health left: " + currentHealth.ToString());
+        rb.AddForce(hitDirection * knockbackForce, ForceMode2D.Impulse);
     }
 }

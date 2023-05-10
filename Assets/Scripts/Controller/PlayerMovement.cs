@@ -3,9 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MovementBase
 {
-    public float movementSpeed = 7.0f;
+    public float speed = 10.0f;
     private Vector2 movementInput;
     private Rigidbody2D rb;
+
+    public float currentSpeedDebug = 0.0f;
 
     void Start()
     {
@@ -14,7 +16,8 @@ public class PlayerMovement : MovementBase
 
     void FixedUpdate()
     {
-        Move(movementInput * movementSpeed);
+        Move(movementInput * speed);
+        currentSpeedDebug = rb.velocity.magnitude;
     }
 
     void OnMove(InputValue movementValue)
