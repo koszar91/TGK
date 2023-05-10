@@ -185,8 +185,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
+  m_Mass: 1
+  m_LinearDrag: 0.05
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -232,9 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba04244c120ca40e5b846f94a983e480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 7450234455958945528}
+  attackDamage: 2
   attackRange: 1.2
-  damage: 3
+  knockbackForce: 0.5
+  maxHealth: 10
+  currentHealth: 0
 --- !u!114 &3655100476298286480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,4 +249,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b07c46339105140aad425cc43fd602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementForce: 100
   movementSpeed: 7

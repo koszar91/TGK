@@ -4,31 +4,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyMovement : MovementControllerBase
+public class EnemyMovement : MovementBase
 {
     private Vector3 startPosition;
-    private GameObject player;
     private Rigidbody2D rb;
+    public float speed = 2.0f;
+
+    private GameObject player;
+    public float chaseSpeedMultiplier = 1.2f;
+    public float chaseRange = 3.0f;
 
     private Vector3 patrolPoint;
     private float lastTimePatrolPointSet;
-    public float patrolMovementSpeed = 3.0f;
+    public float patrolSpeedMultiplier = 1.0f;
     public float patrolRange = 5.0f;
     public float patrolPointChangePeriod = 4.0f;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         player = GameObject.FindWithTag("Player");
+
         patrolPoint = ComputePatrolPoint();
-        rb = GetComponent<Rigidbody2D>();
+
         float patrolOffset = UnityEngine.Random.Range(0f, patrolPointChangePeriod);
         lastTimePatrolPointSet = Time.realtimeSinceStartup - patrolOffset;
     }
 
     void FixedUpdate()
     {
-        Patrol();
+        float distanceToPlayer = (player.transform.position - transform.position).magnitude;
+
+        if (distanceToPlayer <= chaseRange) Chase();
+        else                                Patrol();
+    }
+
+    private void Chase()
+    {
+        Vector3 destinationDir = player.transform.position - transform.position;
+        destinationDir.Normalize();
+
+        Move(destinationDir * speed * chaseSpeedMultiplier);
     }
 
     private void Patrol()
@@ -42,7 +59,7 @@ public class EnemyMovement : MovementControllerBase
         if (destinationDir.magnitude < 0.05) destinationDir = Vector3.zero;
         else destinationDir.Normalize();
 
-        Move(destinationDir * patrolMovementSpeed);
+        Move(destinationDir * speed * patrolSpeedMultiplier);
     }
 
     private Vector3 ComputePatrolPoint()

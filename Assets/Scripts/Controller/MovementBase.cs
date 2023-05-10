@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementControllerBase : MonoBehaviour
+public class MovementBase : MonoBehaviour
 {
+    public float movementForce = 1.0f;
+
     protected void Move(Vector2 movement)
     {
         // Change rb position
         var rb = GetComponent<Rigidbody2D>();
-        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+        movement.Normalize();
+        rb.AddForce(movement * movementForce * Time.fixedTime);
 
         // Rotate
         if (movement.x > 0) transform.localRotation = Quaternion.Euler(0, 0, 0);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MovementControllerBase
+public class PlayerMovement : MovementBase
 {
     public float movementSpeed = 7.0f;
     private Vector2 movementInput;

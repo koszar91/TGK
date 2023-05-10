@@ -2,25 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCombat : MonoBehaviour
+public class EnemyCombat : CombatBase
 {
-    public float maxHealth = 10;
-    public float health;
+    private float deadAnimationTime = 0.4f;
+    private bool isDead = false;
+    private float deadlyHitTime = -1;
 
-    void Start()
+    void FixedUpdate()
     {
-        health = maxHealth;
+        if (deadlyHitTime > 0 && Time.fixedTime - deadlyHitTime >= deadAnimationTime)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    public void Hit(float damage)
+    protected override void Hit(float damage, Vector3 hitDirection)
     {
-        health -= damage;
-        Debug.Log("Enemy hit with " + damage + " damage!");
-        
-        if (health <= 0)
+        if(isDead) return;
+
+        base.Hit(damage, hitDirection);
+
+        if (currentHealth <= 0)
         {
-            Debug.Log("Enemy dead!");
-            Destroy(this.gameObject);
+            Debug.Log(gameObject.name + " dead!");
+            deadlyHitTime = Time.fixedTime;
+            isDead = true;
         }
     }
 }
