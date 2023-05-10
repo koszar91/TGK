@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class EnemyMovement : MovementBase
 {
     private Vector3 startPosition;
-    private Rigidbody2D rb;
     public float speed = 6.0f;
 
     private GameObject player;
@@ -22,7 +21,6 @@ public class EnemyMovement : MovementBase
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         player = GameObject.FindWithTag("Player");
 
@@ -52,8 +50,11 @@ public class EnemyMovement : MovementBase
             lastTimePatrolPointSet = Time.fixedTime;
             patrolPoint = ComputePatrolPoint();
         }
-        Vector3 destinationDir = (patrolPoint - transform.position).normalized;
-        Move(destinationDir * speed * patrolSpeedMultiplier);
+        Vector3 destination = patrolPoint - transform.position;
+        if (destination.magnitude < 0.05) destination = Vector3.zero;
+        else destination = destination.normalized;
+        
+        Move(destination * speed * patrolSpeedMultiplier);
     }
 
     private Vector3 ComputePatrolPoint()

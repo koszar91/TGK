@@ -43,7 +43,6 @@ public class CombatBase : MonoBehaviour
     {
         animator.SetTrigger("hit");
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " hit with " + damage.ToString() + ". Health left: " + currentHealth.ToString());
         rb.AddForce(hitDirection * knockbackForce, ForceMode2D.Impulse);
     }
 }

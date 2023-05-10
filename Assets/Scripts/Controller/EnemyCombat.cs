@@ -18,13 +18,12 @@ public class EnemyCombat : CombatBase
 
     protected override void Hit(float damage, Vector3 hitDirection)
     {
-        if(isDead) return;
+        if (isDead)
+            return;
 
         base.Hit(damage, hitDirection);
-
         if (currentHealth <= 0)
         {
-            Debug.Log(gameObject.name + " dead!");
             deathTime = Time.fixedTime;
             isDead = true;
         }
