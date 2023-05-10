@@ -6,11 +6,11 @@ public class EnemyCombat : CombatBase
 {
     private float deadAnimationTime = 0.4f;
     private bool isDead = false;
-    private float deadlyHitTime = -1;
+    private float deathTime;
 
     void FixedUpdate()
     {
-        if (deadlyHitTime > 0 && Time.fixedTime - deadlyHitTime >= deadAnimationTime)
+        if (isDead && Time.fixedTime - deathTime >= deadAnimationTime)
         {
             Destroy(this.gameObject);
         }
@@ -25,7 +25,7 @@ public class EnemyCombat : CombatBase
         if (currentHealth <= 0)
         {
             Debug.Log(gameObject.name + " dead!");
-            deadlyHitTime = Time.fixedTime;
+            deathTime = Time.fixedTime;
             isDead = true;
         }
     }

@@ -7,8 +7,6 @@ public class PlayerMovement : MovementBase
     private Vector2 movementInput;
     private Rigidbody2D rb;
 
-    public float currentSpeedDebug = 0.0f;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,7 +15,6 @@ public class PlayerMovement : MovementBase
     void FixedUpdate()
     {
         Move(movementInput * speed);
-        currentSpeedDebug = rb.velocity.magnitude;
     }
 
     void OnMove(InputValue movementValue)

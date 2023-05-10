@@ -35,16 +35,13 @@ public class EnemyMovement : MovementBase
     void FixedUpdate()
     {
         float distanceToPlayer = (player.transform.position - transform.position).magnitude;
-
         if (distanceToPlayer <= chaseRange) Chase();
         else                                Patrol();
     }
 
     private void Chase()
     {
-        Vector3 destinationDir = player.transform.position - transform.position;
-        destinationDir.Normalize();
-
+        Vector3 destinationDir = (player.transform.position - transform.position).normalized;
         Move(destinationDir * speed * chaseSpeedMultiplier);
     }
 
@@ -55,10 +52,7 @@ public class EnemyMovement : MovementBase
             lastTimePatrolPointSet = Time.fixedTime;
             patrolPoint = ComputePatrolPoint();
         }
-        Vector2 destinationDir = (Vector2)(patrolPoint - transform.position);
-        if (destinationDir.magnitude < 0.05) destinationDir = Vector3.zero;
-        else destinationDir.Normalize();
-
+        Vector3 destinationDir = (patrolPoint - transform.position).normalized;
         Move(destinationDir * speed * patrolSpeedMultiplier);
     }
 
