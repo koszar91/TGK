@@ -229,14 +229,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4788494229754366118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba04244c120ca40e5b846f94a983e480, type: 3}
+  m_Script: {fileID: 11500000, guid: ecf88bfa1b3590e4da44084fed6f7ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  attackRange: 1.2
-  knockbackForce: 0.5
-  maxHealth: 10
-  currentHealth: 0
+  speed: 7
 --- !u!114 &3655100476298286480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +242,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4788494229754366118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b07c46339105140aad425cc43fd602, type: 3}
+  m_Script: {fileID: 11500000, guid: aaccaac205da6074e9aa34ff4e2aae9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  currentSpeedDebug: 0
+  attackDamage: 2
+  attackRange: 3
+  knockbackForce: 1
+  maxHealth: 10
+  currentHealth: 10

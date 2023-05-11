@@ -294,10 +294,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 151051305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d198e82b3114b29a3983dceb22163f, type: 3}
+  m_Script: {fileID: 11500000, guid: d6003265116db7e4a97c6b12dbc8a55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1427776901}
+--- !u!1 &310434726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310434727}
+  - component: {fileID: 310434728}
+  m_Layer: 0
+  m_Name: DungeonGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &310434727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310434726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5610166, y: 58.517006, z: 1.9388572}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &310434728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310434726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28305cd9edc7ef46b687f70269b0e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iterations: 120
+  walkLength: 120
+  roomsCount: 7
+  corridorLength: 60
+  floorTilemap: {fileID: 1666441207}
+  wallTilemap: {fileID: 1963093754}
+  exitTilemap: {fileID: 151051309}
+  floorTile: {fileID: 11400000, guid: 014f97e2586f81a4d9c93cb40628f3f1, type: 2}
+  wallTile: {fileID: 11400000, guid: 1953caea11c84484cb32342e402620f3, type: 2}
+  exitTile: {fileID: 11400000, guid: 0d887f14d9ae634438c7bca1dd6082ea, type: 2}
 --- !u!1 &743470125
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +421,7 @@ Transform:
   m_Children:
   - {fileID: 813574954}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &813574953
 GameObject:
@@ -467,7 +521,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1427776902}
   - component: {fileID: 1427776901}
-  - component: {fileID: 1427776903}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -484,14 +537,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1427776900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 027967070c26f4d189db30cccb20f680, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d487750f4f5d424087e43014537a653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4788494229754366118, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
   skeletonPrefab: {fileID: 7079777409958595582, guid: 72f48d5f07a8d724aaca695661909fcf, type: 3}
   orcPrefab: {fileID: 4633396114811504920, guid: bd717a820b887b2459455493283f5726, type: 3}
   playerCamera: {fileID: 743470126}
-  dungeonGenerator: {fileID: 1427776903}
+  dungeonGenerator: {fileID: 310434728}
 --- !u!4 &1427776902
 Transform:
   m_ObjectHideFlags: 0
@@ -507,28 +560,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1427776903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427776900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5309bbc46e394447a1bcbee8a667a84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iterations: 120
-  walkLength: 120
-  roomsCount: 7
-  corridorLength: 60
-  floorTilemap: {fileID: 1666441207}
-  wallTilemap: {fileID: 1963093754}
-  exitTilemap: {fileID: 151051309}
-  floorTile: {fileID: 11400000, guid: e73e5be70b674d64d880df22fd4c6ca0, type: 2}
-  wallTile: {fileID: 11400000, guid: 9bafe812de78ec644af8a59e4c5ffb5b, type: 2}
-  exitTile: {fileID: 11400000, guid: 0d887f14d9ae634438c7bca1dd6082ea, type: 2}
 --- !u!1 &1666441204
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +749,7 @@ Transform:
   - {fileID: 1963093752}
   - {fileID: 151051306}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1963093751
 GameObject:
@@ -964,7 +995,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2080816792
 MonoBehaviour:

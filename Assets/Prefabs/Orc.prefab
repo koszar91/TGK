@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7504605560925696088}
   m_Layer: 0
   m_Name: Orc
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,13 +145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4633396114811504920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0aefbb30441540bbb547a2088a5e139, type: 3}
+  m_Script: {fileID: 11500000, guid: e74872fa968b5e74fa655e154fbee9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  attackRange: 1
-  knockbackForce: 30
-  maxHealth: 20
+  maxHealth: 10
   currentHealth: 0
 --- !u!114 &9114940514165167181
 MonoBehaviour:
@@ -162,15 +159,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4633396114811504920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d302214e451ac094e8178377b799a2e3, type: 3}
+  m_Script: {fileID: 11500000, guid: f999ffd0554c52645b297e305c37d4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
   chaseSpeedMultiplier: 1.2
   chaseRange: 3
   patrolSpeedMultiplier: 1
-  patrolRange: 10
-  patrolPointChangePeriod: 10
+  patrolRange: 5
+  patrolPointChangePeriod: 4
 --- !u!95 &7504605560925696088
 Animator:
   serializedVersion: 5
