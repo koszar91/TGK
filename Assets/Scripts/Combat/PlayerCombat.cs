@@ -6,7 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     public float attackDamage = 2.0f;
     public float attackRange  = 3.0f;
-    public float knockbackForce = 1.0f;
+    public float knockbackForce = 50.0f;
     public float maxHealth = 10.0f;
     public float currentHealth = 10.0f;
 
