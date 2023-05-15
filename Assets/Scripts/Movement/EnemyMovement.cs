@@ -11,13 +11,15 @@ public class EnemyMovement : MovementBase
 
     private GameObject player;
     public float chaseSpeedMultiplier = 1.2f;
-    public float chaseRange = 3.0f;
+    public float chaseStateRange = 4.0f;
 
     private Vector3 patrolPoint;
     private float lastTimePatrolPointSet;
     public float patrolSpeedMultiplier = 1.0f;
-    public float patrolRange = 5.0f;
     public float patrolPointChangePeriod = 4.0f;
+    public float patrolPointRange = 5.0f;
+
+    public float attackStateRange = 1.5f;
 
     void Start()
     {
@@ -33,17 +35,23 @@ public class EnemyMovement : MovementBase
     void FixedUpdate()
     {
         float distanceToPlayer = (player.transform.position - transform.position).magnitude;
-        if (distanceToPlayer <= chaseRange) Chase();
-        else                                Patrol();
+        if      (distanceToPlayer <= attackStateRange) AttackState();
+        else if (distanceToPlayer <= chaseStateRange)  ChaseState();
+        else                                           PatrolState();
     }
 
-    private void Chase()
+    private void AttackState()
+    {
+        Move(Vector2.zero);
+    }
+
+    private void ChaseState()
     {
         Vector3 destinationDir = (player.transform.position - transform.position).normalized;
         Move(destinationDir * speed * chaseSpeedMultiplier);
     }
 
-    private void Patrol()
+    private void PatrolState()
     {
         if (Time.fixedTime - lastTimePatrolPointSet >= patrolPointChangePeriod)
         {
@@ -63,6 +71,6 @@ public class EnemyMovement : MovementBase
         float x = Mathf.Cos(angle);
         float y = Mathf.Sin(angle);
         Vector3 randomPointOnCircle = new Vector3(x, y, 0);
-        return startPosition + randomPointOnCircle * patrolRange;
+        return startPosition + randomPointOnCircle * patrolPointRange;
     }
 }

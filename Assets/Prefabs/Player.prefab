@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 2
-  attackRange: 3
-  knockbackForce: 1
+  attackRange: 1.5
+  knockbackForce: 50
   maxHealth: 10
   currentHealth: 10
