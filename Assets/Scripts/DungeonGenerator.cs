@@ -10,7 +10,6 @@ public class DungeonGenerator : MonoBehaviour
 {
     public int iterations = 120;
     public int walkLength = 120;
-    public int roomsCount = 7;
     public int corridorLength = 60;
 
     public Tilemap floorTilemap;
@@ -27,7 +26,7 @@ public class DungeonGenerator : MonoBehaviour
         Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left
     };
 
-    public void GenerateDungeon(Vector2Int playerStartPosition)
+    public void GenerateDungeon(Vector2Int playerStartPosition, int roomsCount)
     {
         // Add first room
         var currentStartPosition = Vector2Int.zero;

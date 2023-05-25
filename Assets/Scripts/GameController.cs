@@ -16,9 +16,7 @@ public class GameController : MonoBehaviour
 
     GameObject player;
     Vector2Int playerStartPosition = Vector2Int.zero;
-
-    int skeletonsCount = 50;
-    int orcsCount = 30;
+    
     Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 
     int currentLevel = 1;
@@ -60,7 +58,7 @@ public class GameController : MonoBehaviour
     {
         // Reset dungeon
         dungeonGenerator.ClearDungeon();
-        dungeonGenerator.GenerateDungeon(playerStartPosition);
+        dungeonGenerator.GenerateDungeon(playerStartPosition, currentLevel + 1);
 
         // Reset player
         Destroy(player);
@@ -72,6 +70,7 @@ public class GameController : MonoBehaviour
         enemies.Clear();
         
         // Spawn skeletons
+        int skeletonsCount = (currentLevel + 1) * 10;
         for (int i = 0; i < skeletonsCount; i++)
         {
             int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
@@ -83,6 +82,7 @@ public class GameController : MonoBehaviour
         }
 
         // Spawn orcs
+        int orcsCount = currentLevel + 1;
         for (int i = 0; i < orcsCount; i++)
         {
             int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
