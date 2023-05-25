@@ -9,7 +9,7 @@ public class EnemyMovement : MovementBase
     private Vector3 startPosition;
     public float speed = 6.0f;
 
-    private GameObject player;
+    private GameObject player = null;
     public float chaseSpeedMultiplier = 1.2f;
     public float chaseStateRange = 4.0f;
 
@@ -21,10 +21,15 @@ public class EnemyMovement : MovementBase
 
     public float attackStateRange = 1.5f;
 
+    public void SetPlayer(GameObject newPlayer)
+    {
+        player = newPlayer;
+    }
+
     void Start()
     {
         startPosition = transform.position;
-        player = GameObject.FindWithTag("Player");
+        // player = GameObject.FindWithTag("Player");
 
         patrolPoint = ComputePatrolPoint();
 
@@ -34,6 +39,9 @@ public class EnemyMovement : MovementBase
 
     void FixedUpdate()
     {
+        if (player == null)
+            return;
+        
         float distanceToPlayer = (player.transform.position - transform.position).magnitude;
         if      (distanceToPlayer <= attackStateRange) AttackState();
         else if (distanceToPlayer <= chaseStateRange)  ChaseState();

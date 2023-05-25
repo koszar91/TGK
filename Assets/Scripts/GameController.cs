@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
     int orcsCount = 30;
     Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 
-    bool nextLevel = false;
     int currentLevel = 1;
 
     public void Start()
@@ -31,27 +30,30 @@ public class GameController : MonoBehaviour
 
     public void Update()
     {
-        if (nextLevel) StartLevel();
-        nextLevel = false;
+        
     }
 
     public void PlayerExit()
     {
         Debug.Log("Level " + currentLevel + " completed!");
         currentLevel ++;
-        nextLevel = true;
+        StartLevel();
     }
 
     public void EnemyDead(GameObject enemy)
     {
         int id = enemy.GetInstanceID();
+        Debug.Log("Enemy " + id + " should be destroyed. Is in map: " + enemies.ContainsKey(id));
         Destroy(enemies[id]);
+        Debug.Log("destroyed enemy: " + enemies[id]);
         enemies.Remove(id);
     }
 
     public void PlayerDead()
     {
-        Debug.Log("Player dead");
+        Debug.Log("Game lost!");
+        currentLevel = 1;
+        StartLevel();
     }
 
     private void StartLevel()
@@ -75,15 +77,19 @@ public class GameController : MonoBehaviour
             int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
             Vector2 skeletonPosition = dungeonGenerator.FloorPositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
             GameObject skeleton = Instantiate(skeletonPrefab, (Vector3)(skeletonPosition), Quaternion.identity);
+            skeleton.GetComponent<EnemyCombat>().SetPlayer(player);
+            skeleton.GetComponent<EnemyMovement>().SetPlayer(player);
             enemies.Add(skeleton.GetInstanceID(), skeleton);
         }
 
         // Spawn orcs
         for (int i = 0; i < orcsCount; i++)
         {
-            int randomIndex = Random.Range(0, dungeonGenerator.FloorInsidePositions.Count);
-            Vector2 orcPosition = dungeonGenerator.FloorInsidePositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
+            int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
+            Vector2 orcPosition = dungeonGenerator.FloorPositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
             GameObject orc = Instantiate(orcPrefab, (Vector3)(orcPosition), Quaternion.identity);
+            orc.GetComponent<EnemyCombat>().SetPlayer(player);
+            orc.GetComponent<EnemyMovement>().SetPlayer(player);
             enemies.Add(orc.GetInstanceID(), orc);
         }
     }

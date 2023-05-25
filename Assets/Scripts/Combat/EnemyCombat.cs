@@ -11,7 +11,7 @@ public class EnemyCombat : MonoBehaviour
     private float deadAnimationTime = 0.4f;
     private float deathTime;
 
-    private GameObject player;
+    private GameObject player = null;
     private float lastTimeAttacked;
     public float knockbackForce = 25.0f;
     public float attackDamage = 1.0f;
@@ -23,13 +23,18 @@ public class EnemyCombat : MonoBehaviour
     private Rigidbody2D rb;
     private GameController gameController;
 
+    public void SetPlayer(GameObject newPlayer)
+    {
+        player = newPlayer;
+    }
+
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         attackPoint = transform.Find("AttackPoint");
         currentHealth = maxHealth;
-        player = GameObject.FindWithTag("Player");
+        // player = GameObject.FindWithTag("Player");
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
@@ -40,6 +45,8 @@ public class EnemyCombat : MonoBehaviour
             gameController.EnemyDead(this.gameObject);
         }
 
+        if (player == null)
+            return;
         float distanceToPlayer = (player.transform.position - transform.position).magnitude;
         if (distanceToPlayer <= attackRange && Time.fixedTime - lastTimeAttacked >= attackCooldown)
         {
