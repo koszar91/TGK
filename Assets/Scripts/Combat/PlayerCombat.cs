@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public float attackCooldown = 0.5f;
+    private float lastTimeAttacked;
     public float attackDamage = 2.0f;
     public float attackRange  = 3.0f;
     public float knockbackForce = 50.0f;
+
     public float maxHealth = 10.0f;
     public float currentHealth = 10.0f;
 
     private Animator animator;
     private Transform attackPoint;
     private Rigidbody2D rb;
+    private GameController gameController;
 
     void Start()
     {
@@ -20,11 +24,16 @@ public class PlayerCombat : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         attackPoint = transform.Find("AttackPoint");
         currentHealth = maxHealth;
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     void OnFire()
     {
-        Attack();
+        if (Time.realtimeSinceStartup - lastTimeAttacked >= attackCooldown)
+        {
+            Attack();
+            lastTimeAttacked = Time.realtimeSinceStartup;
+        }
     }
 
     private void Attack()
@@ -47,5 +56,6 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("hit");
         currentHealth -= attackDamage;
         rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+        if (currentHealth <= 0) gameController.PlayerDead();
     }
 }

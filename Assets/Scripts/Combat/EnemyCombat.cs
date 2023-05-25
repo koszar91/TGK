@@ -7,7 +7,7 @@ public class EnemyCombat : MonoBehaviour
     public float maxHealth = 10.0f;
     public float currentHealth;
 
-    private bool isDead = false;
+    public bool isDead = false;
     private float deadAnimationTime = 0.4f;
     private float deathTime;
 
@@ -21,6 +21,7 @@ public class EnemyCombat : MonoBehaviour
     private Animator animator;
     private Transform attackPoint;
     private Rigidbody2D rb;
+    private GameController gameController;
 
     void Start()
     {
@@ -29,13 +30,14 @@ public class EnemyCombat : MonoBehaviour
         attackPoint = transform.Find("AttackPoint");
         currentHealth = maxHealth;
         player = GameObject.FindWithTag("Player");
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     void FixedUpdate()
     {
         if (isDead && Time.fixedTime - deathTime >= deadAnimationTime)
         {
-            Destroy(this.gameObject);
+            gameController.EnemyDead(this.gameObject);
         }
 
         float distanceToPlayer = (player.transform.position - transform.position).magnitude;
