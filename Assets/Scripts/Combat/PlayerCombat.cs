@@ -27,6 +27,14 @@ public class PlayerCombat : MonoBehaviour
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
+    public void ApplyHealthPotion(int value)
+    {
+        currentHealth += value;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+        Debug.Log("Potion consumed. Current hp: " + currentHealth);
+    }
+
     void OnFire()
     {
         if (Time.realtimeSinceStartup - lastTimeAttacked >= attackCooldown)

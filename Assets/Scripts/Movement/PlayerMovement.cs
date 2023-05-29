@@ -15,4 +15,10 @@ public class PlayerMovement : MovementBase
     {
         movementInput = movementValue.Get<Vector2>();
     }
+
+    public void ApplySpeedPotion(float value)
+    {
+        speed *= value;
+        Debug.Log("Potion consumed. Current speed: " + speed);
+    }
 }

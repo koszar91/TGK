@@ -344,7 +344,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iterations: 120
   walkLength: 120
-  roomsCount: 7
   corridorLength: 60
   floorTilemap: {fileID: 1666441207}
   wallTilemap: {fileID: 1963093754}
@@ -543,6 +542,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 4788494229754366118, guid: fc2a6df1aed944d4b997d8350e297323, type: 3}
   skeletonPrefab: {fileID: 7079777409958595582, guid: 72f48d5f07a8d724aaca695661909fcf, type: 3}
   orcPrefab: {fileID: 4633396114811504920, guid: bd717a820b887b2459455493283f5726, type: 3}
+  healthPotionPrefab: {fileID: 743745398113166685, guid: 158011e9c339a1b448aaadb344d69c05, type: 3}
+  speedPotionPrefab: {fileID: 743745398113166685, guid: 77de062a659776d4fbe272b1fe36570f, type: 3}
   playerCamera: {fileID: 743470126}
   dungeonGenerator: {fileID: 310434728}
 --- !u!4 &1427776902

@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject skeletonPrefab;
     public GameObject orcPrefab;
+    public GameObject healthPotionPrefab;
+    public GameObject speedPotionPrefab;
+
     public CinemachineVirtualCamera playerCamera;
     public DungeonGenerator dungeonGenerator;
 
@@ -18,6 +21,7 @@ public class GameController : MonoBehaviour
     Vector2Int playerStartPosition = Vector2Int.zero;
     
     Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
+    Dictionary<int, GameObject> potions = new Dictionary<int, GameObject>();
 
     int currentLevel = 1;
 
@@ -41,10 +45,15 @@ public class GameController : MonoBehaviour
     public void EnemyDead(GameObject enemy)
     {
         int id = enemy.GetInstanceID();
-        Debug.Log("Enemy " + id + " should be destroyed. Is in map: " + enemies.ContainsKey(id));
         Destroy(enemies[id]);
-        Debug.Log("destroyed enemy: " + enemies[id]);
         enemies.Remove(id);
+    }
+
+    public void PotionConsumed(GameObject potion)
+    {
+        int id = potion.GetInstanceID();
+        Destroy(potions[id]);
+        potions.Remove(id);
     }
 
     public void PlayerDead()
@@ -70,7 +79,7 @@ public class GameController : MonoBehaviour
         enemies.Clear();
         
         // Spawn skeletons
-        int skeletonsCount = (currentLevel + 1) * 10;
+        int skeletonsCount = currentLevel * 10;
         for (int i = 0; i < skeletonsCount; i++)
         {
             int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
@@ -82,7 +91,7 @@ public class GameController : MonoBehaviour
         }
 
         // Spawn orcs
-        int orcsCount = currentLevel + 1;
+        int orcsCount = currentLevel + 3;
         for (int i = 0; i < orcsCount; i++)
         {
             int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
@@ -91,6 +100,30 @@ public class GameController : MonoBehaviour
             orc.GetComponent<EnemyCombat>().SetPlayer(player);
             orc.GetComponent<EnemyMovement>().SetPlayer(player);
             enemies.Add(orc.GetInstanceID(), orc);
+        }
+
+        // Clear health postions
+        foreach (var pair in potions) Destroy(pair.Value);
+        potions.Clear();
+
+        // Spawn healthPotions
+        int healthPotionCount = (currentLevel + 1) * 2;
+        for (int i = 0; i < healthPotionCount; i++)
+        {
+            int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
+            Vector2 potionPosition = dungeonGenerator.FloorPositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
+            GameObject potion = Instantiate(healthPotionPrefab, (Vector3)(potionPosition), Quaternion.identity);
+            potions.Add(potion.GetInstanceID(), potion);
+        }
+
+        // Spawn speedPotions
+        int speedPotionCount = (currentLevel + 1);
+        for (int i = 0; i < speedPotionCount; i++)
+        {
+            int randomIndex = Random.Range(0, dungeonGenerator.FloorPositions.Count);
+            Vector2 potionPosition = dungeonGenerator.FloorPositions.ElementAt(randomIndex) + new Vector2(0.5f, 0.5f);
+            GameObject potion = Instantiate(speedPotionPrefab, (Vector3)(potionPosition), Quaternion.identity);
+            potions.Add(potion.GetInstanceID(), potion);
         }
     }
     
